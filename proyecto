@@ -1,0 +1,918 @@
+<div id="app">
+
+  <!-- =========================
+       LOGIN
+  ========================== -->
+  <section id="loginPage" class="login-page">
+
+    <div class="login-card">
+
+      <div class="logo-container">
+        <!-- INCLUIR LOGO AQUÍ -->
+        <div class="logo-placeholder">
+          ⚡
+        </div>
+      </div>
+
+      <h1>ElectroMonitor</h1>
+      <p class="login-subtitle">
+        Plataforma inteligente de monitoreo y educación eléctrica
+      </p>
+
+      <form id="loginForm">
+
+        <div class="input-group">
+          <label>Correo electrónico</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="usuario@correo.com"
+            required
+          >
+        </div>
+
+        <div class="input-group">
+          <label>Contraseña</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="••••••••"
+            required
+          >
+        </div>
+
+        <div class="remember">
+          <label>
+            <input type="checkbox">
+            Recordarme
+          </label>
+
+          <a href="#">¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <button type="submit" class="primary-btn">
+          Iniciar sesión
+        </button>
+
+      </form>
+
+      <p class="demo">
+        Demo: cualquier correo y contraseña
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       SISTEMA
+  ========================== -->
+  <section id="dashboardPage" class="dashboard-page hidden">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div class="brand">
+        <div class="mini-logo">
+          ⚡
+        </div>
+
+        <div>
+          <strong>ElectroMonitor</strong>
+          <small>Smart Energy</small>
+        </div>
+      </div>
+
+      <nav>
+
+        <button class="nav-item active" data-section="dashboard">
+          <span>📊</span>
+          Dashboard
+        </button>
+
+        <button class="nav-item" data-section="monitor">
+          <span>⚡</span>
+          Monitoreo
+        </button>
+
+        <button class="nav-item" data-section="equipment">
+          <span>🔌</span>
+          Equipos
+        </button>
+
+        <button class="nav-item" data-section="education">
+          <span>📚</span>
+          Aprender
+        </button>
+
+        <button class="nav-item" data-section="quiz">
+          <span>📝</span>
+          Cuestionarios
+        </button>
+
+        <button class="nav-item" data-section="alerts">
+          <span>🚨</span>
+          Alertas
+        </button>
+
+      </nav>
+
+      <div class="sidebar-bottom">
+
+        <div class="user-mini">
+          <div class="avatar">LR</div>
+
+          <div>
+            <strong>Usuario Demo</strong>
+            <small>Administrador</small>
+          </div>
+        </div>
+
+        <button id="logoutBtn" class="logout-btn">
+          ↪ Cerrar sesión
+        </button>
+
+      </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="main-content">
+
+      <!-- HEADER -->
+      <header class="topbar">
+
+        <div>
+          <h2 id="pageTitle">Dashboard</h2>
+          <p id="pageSubtitle">
+            Monitoreo energético en tiempo real
+          </p>
+        </div>
+
+        <div class="top-actions">
+
+          <div class="status">
+            <span class="status-dot"></span>
+            Sistema operativo
+          </div>
+
+          <button class="notification">
+            🔔
+            <span>3</span>
+          </button>
+
+        </div>
+
+      </header>
+
+
+      <!-- =========================
+           DASHBOARD
+      ========================== -->
+      <section id="dashboard" class="content-section active-section">
+
+        <div class="welcome">
+          <div>
+            <h1>¡Hola, Laura! 👋</h1>
+            <p>
+              Revisa el estado de tu sistema eléctrico y aprende
+              a gestionar mejor la energía.
+            </p>
+          </div>
+
+          <button
+            class="primary-btn"
+            onclick="showSection('monitor')"
+          >
+            Ver monitoreo →
+          </button>
+        </div>
+
+
+        <div class="metrics">
+
+          <div class="metric-card">
+            <div class="metric-icon">⚡</div>
+
+            <div>
+              <span>Potencia actual</span>
+              <strong id="powerValue">4.82 kW</strong>
+              <small class="positive">↓ 8.2% vs. ayer</small>
+            </div>
+          </div>
+
+
+          <div class="metric-card">
+            <div class="metric-icon">🔋</div>
+
+            <div>
+              <span>Consumo diario</span>
+              <strong>32.6 kWh</strong>
+              <small class="positive">↓ 5.4% vs. ayer</small>
+            </div>
+          </div>
+
+
+          <div class="metric-card">
+            <div class="metric-icon">🔌</div>
+
+            <div>
+              <span>Equipos activos</span>
+              <strong>18 / 24</strong>
+              <small>75% activos</small>
+            </div>
+          </div>
+
+
+          <div class="metric-card">
+            <div class="metric-icon">🌱</div>
+
+            <div>
+              <span>Eficiencia</span>
+              <strong>91%</strong>
+              <small class="positive">Excelente</small>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="grid-2">
+
+          <div class="panel">
+
+            <div class="panel-header">
+              <div>
+                <h3>Consumo energético</h3>
+                <span>Últimas 24 horas</span>
+              </div>
+
+              <select>
+                <option>24 horas</option>
+                <option>7 días</option>
+                <option>30 días</option>
+              </select>
+            </div>
+
+            <div class="chart">
+              <div class="chart-bars">
+
+                <div class="bar" style="height:35%">
+                  <span>00</span>
+                </div>
+
+                <div class="bar" style="height:50%">
+                  <span>04</span>
+                </div>
+
+                <div class="bar" style="height:42%">
+                  <span>08</span>
+                </div>
+
+                <div class="bar" style="height:78%">
+                  <span>12</span>
+                </div>
+
+                <div class="bar" style="height:91%">
+                  <span>16</span>
+                </div>
+
+                <div class="bar" style="height:68%">
+                  <span>20</span>
+                </div>
+
+                <div class="bar" style="height:45%">
+                  <span>24</span>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="panel">
+
+            <div class="panel-header">
+              <div>
+                <h3>Estado del sistema</h3>
+                <span>Actualizado hace unos segundos</span>
+              </div>
+            </div>
+
+            <div class="system-status">
+
+              <div class="status-row">
+                <span>Voltaje</span>
+                <strong>220.4 V</strong>
+                <em class="normal">Normal</em>
+              </div>
+
+              <div class="status-row">
+                <span>Corriente</span>
+                <strong>21.9 A</strong>
+                <em class="normal">Normal</em>
+              </div>
+
+              <div class="status-row">
+                <span>Frecuencia</span>
+                <strong>60.01 Hz</strong>
+                <em class="normal">Normal</em>
+              </div>
+
+              <div class="status-row">
+                <span>Factor de potencia</span>
+                <strong>0.94</strong>
+                <em class="normal">Bueno</em>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="panel">
+
+          <div class="panel-header">
+            <div>
+              <h3>Alertas recientes</h3>
+              <span>Revisa los eventos del sistema</span>
+            </div>
+
+            <button
+              class="text-btn"
+              onclick="showSection('alerts')"
+            >
+              Ver todas
+            </button>
+          </div>
+
+          <div class="alert-list">
+
+            <div class="alert-item warning">
+              <div>⚠️</div>
+
+              <div>
+                <strong>Consumo elevado</strong>
+                <p>
+                  El equipo Aire Acondicionado 02 supera
+                  el consumo promedio.
+                </p>
+              </div>
+
+              <span>Hace 8 min</span>
+            </div>
+
+
+            <div class="alert-item success">
+              <div>✓</div>
+
+              <div>
+                <strong>Sistema estable</strong>
+                <p>
+                  Los parámetros eléctricos se encuentran
+                  dentro del rango normal.
+                </p>
+              </div>
+
+              <span>Hace 15 min</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =========================
+           MONITOREO
+      ========================== -->
+      <section id="monitor" class="content-section">
+
+        <div class="section-intro">
+          <div>
+            <h1>⚡ Monitoreo eléctrico</h1>
+            <p>
+              Visualiza los principales parámetros eléctricos
+              de tu instalación.
+            </p>
+          </div>
+
+          <div class="live">
+            <span></span> MONITOREO EN VIVO
+          </div>
+        </div>
+
+
+        <div class="monitor-grid">
+
+          <div class="big-monitor">
+            <span>Voltaje</span>
+            <strong id="voltage">220.4</strong>
+            <small>V</small>
+
+            <div class="gauge">
+              <div class="gauge-fill" style="width:82%"></div>
+            </div>
+
+            <p>Rango recomendado: 210 – 230 V</p>
+          </div>
+
+
+          <div class="big-monitor">
+            <span>Corriente</span>
+            <strong id="current">21.9</strong>
+            <small>A</small>
+
+            <div class="gauge">
+              <div class="gauge-fill" style="width:58%"></div>
+            </div>
+
+            <p>Capacidad utilizada: 58%</p>
+          </div>
+
+
+          <div class="big-monitor">
+            <span>Potencia</span>
+            <strong id="power">4.82</strong>
+            <small>kW</small>
+
+            <div class="gauge">
+              <div class="gauge-fill" style="width:65%"></div>
+            </div>
+
+            <p>Consumo actual</p>
+          </div>
+
+        </div>
+
+
+        <div class="panel educational-box">
+
+          <div class="education-icon">
+            💡
+          </div>
+
+          <div>
+            <h3>¿Qué estás monitoreando?</h3>
+
+            <p>
+              El <strong>voltaje</strong> representa la diferencia
+              de potencial eléctrico. La <strong>corriente</strong>
+              indica el flujo de carga eléctrica y la
+              <strong>potencia</strong> representa la energía
+              utilizada por los equipos en un momento determinado.
+            </p>
+
+            <button
+              class="secondary-btn"
+              onclick="showSection('education')"
+            >
+              Aprender conceptos →
+            </button>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =========================
+           EQUIPOS
+      ========================== -->
+      <section id="equipment" class="content-section">
+
+        <div class="section-intro">
+          <div>
+            <h1>🔌 Equipos eléctricos</h1>
+            <p>
+              Controla el consumo de los principales equipos.
+            </p>
+          </div>
+
+          <button class="primary-btn">
+            + Agregar equipo
+          </button>
+        </div>
+
+
+        <div class="equipment-grid">
+
+          <div class="equipment-card">
+            <div class="equipment-top">
+              <span class="equipment-icon">❄️</span>
+              <span class="online">● Online</span>
+            </div>
+
+            <h3>Aire Acondicionado 01</h3>
+
+            <div class="equipment-power">
+              <strong>1.82 kW</strong>
+              <span>Consumo actual</span>
+            </div>
+
+            <div class="progress">
+              <div style="width:72%"></div>
+            </div>
+
+            <p>72% de capacidad</p>
+
+            <button class="secondary-btn">
+              Ver detalles
+            </button>
+          </div>
+
+
+          <div class="equipment-card">
+            <div class="equipment-top">
+              <span class="equipment-icon">💻</span>
+              <span class="online">● Online</span>
+            </div>
+
+            <h3>Laboratorio de cómputo</h3>
+
+            <div class="equipment-power">
+              <strong>1.24 kW</strong>
+              <span>Consumo actual</span>
+            </div>
+
+            <div class="progress">
+              <div style="width:51%"></div>
+            </div>
+
+            <p>51% de capacidad</p>
+
+            <button class="secondary-btn">
+              Ver detalles
+            </button>
+          </div>
+
+
+          <div class="equipment-card">
+            <div class="equipment-top">
+              <span class="equipment-icon">💡</span>
+              <span class="online">● Online</span>
+            </div>
+
+            <h3>Iluminación</h3>
+
+            <div class="equipment-power">
+              <strong>0.76 kW</strong>
+              <span>Consumo actual</span>
+            </div>
+
+            <div class="progress">
+              <div style="width:38%"></div>
+            </div>
+
+            <p>38% de capacidad</p>
+
+            <button class="secondary-btn">
+              Ver detalles
+            </button>
+          </div>
+
+
+          <div class="equipment-card">
+            <div class="equipment-top">
+              <span class="equipment-icon">🖥️</span>
+              <span class="offline">● Offline</span>
+            </div>
+
+            <h3>Servidor principal</h3>
+
+            <div class="equipment-power">
+              <strong>0.00 kW</strong>
+              <span>Sin conexión</span>
+            </div>
+
+            <div class="progress">
+              <div style="width:0%"></div>
+            </div>
+
+            <p>Revisar conexión</p>
+
+            <button class="secondary-btn">
+              Diagnóstico
+            </button>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =========================
+           EDUCACIÓN
+      ========================== -->
+      <section id="education" class="content-section">
+
+        <div class="section-intro">
+
+          <div>
+            <h1>📚 Aprende gestión eléctrica</h1>
+            <p>
+              Aprende conceptos básicos para tomar mejores
+              decisiones sobre el uso de la energía.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="learning-grid">
+
+          <article class="lesson-card">
+
+            <div class="lesson-icon">⚡</div>
+
+            <div class="lesson-level">
+              NIVEL 1
+            </div>
+
+            <h3>Fundamentos de electricidad</h3>
+
+            <p>
+              Aprende qué son el voltaje, corriente, resistencia
+              y potencia eléctrica.
+            </p>
+
+            <div class="lesson-progress">
+              <div style="width:80%"></div>
+            </div>
+
+            <span>80% completado</span>
+
+            <button class="primary-btn">
+              Continuar
+            </button>
+
+          </article>
+
+
+          <article class="lesson-card">
+
+            <div class="lesson-icon">📊</div>
+
+            <div class="lesson-level">
+              NIVEL 2
+            </div>
+
+            <h3>Interpretación de datos</h3>
+
+            <p>
+              Aprende a interpretar los datos obtenidos
+              mediante sistemas de monitoreo.
+            </p>
+
+            <div class="lesson-progress">
+              <div style="width:45%"></div>
+            </div>
+
+            <span>45% completado</span>
+
+            <button class="primary-btn">
+              Continuar
+            </button>
+
+          </article>
+
+
+          <article class="lesson-card">
+
+            <div class="lesson-icon">🌱</div>
+
+            <div class="lesson-level">
+              NIVEL 3
+            </div>
+
+            <h3>Eficiencia energética</h3>
+
+            <p>
+              Identifica oportunidades para reducir el consumo
+              energético sin afectar la operación.
+            </p>
+
+            <div class="lesson-progress">
+              <div style="width:20%"></div>
+            </div>
+
+            <span>20% completado</span>
+
+            <button class="primary-btn">
+              Comenzar
+            </button>
+
+          </article>
+
+
+          <article class="lesson-card">
+
+            <div class="lesson-icon">🛡️</div>
+
+            <div class="lesson-level">
+              NIVEL 4
+            </div>
+
+            <h3>Seguridad eléctrica</h3>
+
+            <p>
+              Conoce buenas prácticas para prevenir accidentes
+              y riesgos eléctricos.
+            </p>
+
+            <div class="lesson-progress">
+              <div style="width:0%"></div>
+            </div>
+
+            <span>Sin comenzar</span>
+
+            <button class="primary-btn">
+              Comenzar
+            </button>
+
+          </article>
+
+        </div>
+
+      </section>
+
+
+      <!-- =========================
+           QUIZ
+      ========================== -->
+      <section id="quiz" class="content-section">
+
+        <div class="quiz-container">
+
+          <div class="quiz-header">
+
+            <div>
+              <span class="quiz-label">CUESTIONARIO</span>
+
+              <h1>¿Cuánto sabes sobre electricidad?</h1>
+
+              <p>
+                Responde las preguntas y comprueba tus conocimientos.
+              </p>
+            </div>
+
+            <div class="score">
+              <span>Puntuación</span>
+              <strong id="score">0</strong>
+            </div>
+
+          </div>
+
+
+          <div class="question-card">
+
+            <div class="question-number">
+              Pregunta <span id="questionNumber">1</span> de 5
+            </div>
+
+            <h2 id="question">
+              ¿Qué unidad se utiliza para medir la potencia eléctrica?
+            </h2>
+
+            <div id="answers" class="answers">
+
+              <button onclick="answerQuestion(this, false)">
+                Voltios (V)
+              </button>
+
+              <button onclick="answerQuestion(this, true)">
+                Watts (W)
+              </button>
+
+              <button onclick="answerQuestion(this, false)">
+                Amperios (A)
+              </button>
+
+              <button onclick="answerQuestion(this, false)">
+                Ohmios (Ω)
+              </button>
+
+            </div>
+
+            <div id="feedback" class="feedback"></div>
+
+            <button
+              id="nextQuestion"
+              class="primary-btn next-btn hidden"
+              onclick="nextQuestion()"
+            >
+              Siguiente pregunta →
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =========================
+           ALERTAS
+      ========================== -->
+      <section id="alerts" class="content-section">
+
+        <div class="section-intro">
+          <div>
+            <h1>🚨 Alertas</h1>
+            <p>
+              Eventos y situaciones que requieren atención.
+            </p>
+          </div>
+        </div>
+
+
+        <div class="alerts-full">
+
+          <div class="alert-card high">
+
+            <div class="alert-symbol">⚠️</div>
+
+            <div>
+              <span class="priority high-label">
+                ALTA PRIORIDAD
+              </span>
+
+              <h3>Consumo elevado detectado</h3>
+
+              <p>
+                Aire Acondicionado 02 presenta un consumo
+                28% superior al promedio histórico.
+              </p>
+
+              <small>Hoy · 10:42 AM</small>
+            </div>
+
+            <button class="secondary-btn">
+              Analizar
+            </button>
+
+          </div>
+
+
+          <div class="alert-card medium">
+
+            <div class="alert-symbol">💡</div>
+
+            <div>
+              <span class="priority medium-label">
+                MEDIA PRIORIDAD
+              </span>
+
+              <h3>Posible desperdicio energético</h3>
+
+              <p>
+                Se detectó iluminación activa fuera del horario
+                habitual.
+              </p>
+
+              <small>Hoy · 09:18 AM</small>
+            </div>
+
+            <button class="secondary-btn">
+              Revisar
+            </button>
+
+          </div>
+
+
+          <div class="alert-card low">
+
+            <div class="alert-symbol">✓</div>
+
+            <div>
+              <span class="priority low-label">
+                INFORMACIÓN
+              </span>
+
+              <h3>Sistema funcionando correctamente</h3>
+
+              <p>
+                Todos los parámetros eléctricos principales
+                se encuentran dentro del rango esperado.
+              </p>
+
+              <small>Hoy · 08:30 AM</small>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </section>
+
+</div>
