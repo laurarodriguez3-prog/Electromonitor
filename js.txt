@@ -1,0 +1,497 @@
+/* =========================================
+   ELECTROMONITOR
+   JavaScript
+========================================= */
+
+
+/* =========================
+   LOGIN
+========================= */
+
+const loginForm = document.getElementById("loginForm");
+const loginPage = document.getElementById("loginPage");
+const dashboardPage = document.getElementById("dashboardPage");
+
+loginForm.addEventListener("submit", function(event) {
+
+  event.preventDefault();
+
+  loginPage.classList.add("hidden");
+  dashboardPage.classList.remove("hidden");
+
+});
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+document.getElementById("logoutBtn").addEventListener("click", function() {
+
+  dashboardPage.classList.add("hidden");
+  loginPage.classList.remove("hidden");
+
+});
+
+
+/* =========================
+   NAVEGACIÓN
+========================= */
+
+const navItems = document.querySelectorAll(".nav-item");
+
+const titles = {
+
+  dashboard: [
+    "Dashboard",
+    "Monitoreo energético en tiempo real"
+  ],
+
+  monitor: [
+    "Monitoreo eléctrico",
+    "Visualización de parámetros eléctricos"
+  ],
+
+  equipment: [
+    "Equipos eléctricos",
+    "Control y seguimiento del consumo"
+  ],
+
+  education: [
+    "Aprender",
+    "Aprende a gestionar correctamente la energía"
+  ],
+
+  quiz: [
+    "Cuestionarios",
+    "Evalúa tus conocimientos eléctricos"
+  ],
+
+  alerts: [
+    "Alertas",
+    "Eventos que requieren atención"
+  ]
+
+};
+
+
+navItems.forEach(item => {
+
+  item.addEventListener("click", function() {
+
+    const section = this.dataset.section;
+
+    showSection(section);
+
+  });
+
+});
+
+
+function showSection(sectionName) {
+
+  document.querySelectorAll(".content-section").forEach(section => {
+
+    section.classList.remove("active-section");
+
+  });
+
+
+  const selectedSection =
+    document.getElementById(sectionName);
+
+  if (selectedSection) {
+
+    selectedSection.classList.add("active-section");
+
+  }
+
+
+  navItems.forEach(item => {
+
+    item.classList.remove("active");
+
+    if (item.dataset.section === sectionName) {
+
+      item.classList.add("active");
+
+    }
+
+  });
+
+
+  document.getElementById("pageTitle").textContent =
+    titles[sectionName][0];
+
+  document.getElementById("pageSubtitle").textContent =
+    titles[sectionName][1];
+
+}
+
+
+/* =========================
+   SIMULACIÓN DE MONITOREO
+========================= */
+
+function updateElectricalData() {
+
+  const voltage =
+    (220 + (Math.random() * 2 - 1)).toFixed(1);
+
+  const current =
+    (21 + Math.random() * 2).toFixed(1);
+
+  const power =
+    (4.5 + Math.random() * 0.7).toFixed(2);
+
+
+  document.getElementById("voltage").textContent =
+    voltage;
+
+  document.getElementById("current").textContent =
+    current;
+
+  document.getElementById("power").textContent =
+    power;
+
+  document.getElementById("powerValue").textContent =
+    power + " kW";
+
+}
+
+
+/*
+  Simula una actualización del sistema
+  cada 3 segundos.
+*/
+
+setInterval(updateElectricalData, 3000);
+
+
+/* =========================
+   QUIZ
+========================= */
+
+const questions = [
+
+  {
+    question:
+      "¿Qué unidad se utiliza para medir la potencia eléctrica?",
+
+    answers: [
+      "Voltios (V)",
+      "Watts (W)",
+      "Amperios (A)",
+      "Ohmios (Ω)"
+    ],
+
+    correct: 1,
+
+    explanation:
+      "La potencia eléctrica se mide en watts (W)."
+  },
+
+
+  {
+    question:
+      "¿Qué instrumento se utiliza para medir la corriente eléctrica?",
+
+    answers: [
+      "Voltímetro",
+      "Termómetro",
+      "Amperímetro",
+      "Barómetro"
+    ],
+
+    correct: 2,
+
+    explanation:
+      "La corriente eléctrica se mide con un amperímetro."
+  },
+
+
+  {
+    question:
+      "¿Cuál de estas acciones ayuda a reducir el consumo eléctrico?",
+
+    answers: [
+      "Dejar equipos encendidos",
+      "Usar iluminación eficiente",
+      "Sobrecargar circuitos",
+      "Ignorar las alertas"
+    ],
+
+    correct: 1,
+
+    explanation:
+      "La iluminación eficiente puede reducir considerablemente el consumo."
+  },
+
+
+  {
+    question:
+      "¿Qué representa el voltaje eléctrico?",
+
+    answers: [
+      "La diferencia de potencial",
+      "La temperatura",
+      "La masa",
+      "La velocidad"
+    ],
+
+    correct: 0,
+
+    explanation:
+      "El voltaje representa una diferencia de potencial eléctrico."
+  },
+
+
+  {
+    question:
+      "¿Por qué es importante monitorear el consumo eléctrico?",
+
+    answers: [
+      "Para aumentar el desperdicio",
+      "Para detectar oportunidades de ahorro",
+      "Para apagar todos los equipos",
+      "No tiene ninguna utilidad"
+    ],
+
+    correct: 1,
+
+    explanation:
+      "El monitoreo permite identificar consumos elevados y oportunidades de eficiencia."
+  }
+
+];
+
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+
+
+function loadQuestion() {
+
+  const q = questions[currentQuestion];
+
+  answered = false;
+
+  document.getElementById("questionNumber")
+    .textContent = currentQuestion + 1;
+
+  document.getElementById("question")
+    .textContent = q.question;
+
+
+  const answersContainer =
+    document.getElementById("answers");
+
+  answersContainer.innerHTML = "";
+
+
+  q.answers.forEach((answer, index) => {
+
+    const button =
+      document.createElement("button");
+
+    button.textContent = answer;
+
+    button.addEventListener("click", function() {
+
+      answerQuestion(button, index === q.correct);
+
+    });
+
+    answersContainer.appendChild(button);
+
+  });
+
+
+  document.getElementById("feedback")
+    .textContent = "";
+
+  document.getElementById("nextQuestion")
+    .classList.add("hidden");
+
+}
+
+
+function answerQuestion(button, isCorrect) {
+
+  if (answered) return;
+
+  answered = true;
+
+
+  const buttons =
+    document.querySelectorAll("#answers button");
+
+  buttons.forEach(btn => {
+
+    btn.disabled = true;
+
+  });
+
+
+  if (isCorrect) {
+
+    button.classList.add("correct");
+
+    score += 20;
+
+    document.getElementById("feedback").innerHTML =
+      "✅ ¡Correcto! " +
+      questions[currentQuestion].explanation;
+
+  } else {
+
+    button.classList.add("incorrect");
+
+    document.getElementById("feedback").innerHTML =
+      "❌ Respuesta incorrecta. " +
+      questions[currentQuestion].explanation;
+
+
+    const correctIndex =
+      questions[currentQuestion].correct;
+
+    buttons[correctIndex].classList.add("correct");
+
+  }
+
+
+  document.getElementById("score")
+    .textContent = score;
+
+
+  document.getElementById("nextQuestion")
+    .classList.remove("hidden");
+
+}
+
+
+function nextQuestion() {
+
+  currentQuestion++;
+
+  if (currentQuestion >= questions.length) {
+
+    finishQuiz();
+
+    return;
+
+  }
+
+  loadQuestion();
+
+}
+
+
+function finishQuiz() {
+
+  const questionCard =
+    document.querySelector(".question-card");
+
+  let message = "";
+
+  if (score === 100) {
+
+    message =
+      "🏆 ¡Excelente! Dominas los conceptos eléctricos.";
+
+  } else if (score >= 60) {
+
+    message =
+      "👏 ¡Buen trabajo! Sigue aprendiendo para mejorar.";
+
+  } else {
+
+    message =
+      "📚 Sigue practicando. Cada pregunta es una oportunidad para aprender.";
+
+  }
+
+
+  questionCard.innerHTML = `
+
+    <div style="text-align:center;padding:30px">
+
+      <div style="font-size:55px">🎓</div>
+
+      <h2>Cuestionario completado</h2>
+
+      <p style="
+        color:#718096;
+        margin:15px 0;
+        font-size:14px;
+      ">
+        ${message}
+      </p>
+
+      <div style="
+        font-size:42px;
+        font-weight:800;
+        color:#00a884;
+        margin:20px;
+      ">
+        ${score}/100
+      </div>
+
+      <button
+        class="primary-btn"
+        onclick="restartQuiz()"
+      >
+        Repetir cuestionario
+      </button>
+
+    </div>
+
+  `;
+
+}
+
+
+function restartQuiz() {
+
+  currentQuestion = 0;
+
+  score = 0;
+
+  document.getElementById("score")
+    .textContent = "0";
+
+
+  const questionCard =
+    document.querySelector(".question-card");
+
+  questionCard.innerHTML = `
+
+    <div class="question-number">
+      Pregunta <span id="questionNumber">1</span> de 5
+    </div>
+
+    <h2 id="question"></h2>
+
+    <div id="answers" class="answers"></div>
+
+    <div id="feedback" class="feedback"></div>
+
+    <button
+      id="nextQuestion"
+      class="primary-btn next-btn hidden"
+      onclick="nextQuestion()"
+    >
+      Siguiente pregunta →
+    </button>
+
+  `;
+
+  loadQuestion();
+
+}
+
+
+/* Inicializar cuestionario */
+
+loadQuestion();
